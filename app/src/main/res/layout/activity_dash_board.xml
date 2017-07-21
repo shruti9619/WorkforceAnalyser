@@ -51,11 +51,12 @@
                 android:layout_height="match_parent" app:srcCompat="@color/colorPrimary" android:id="@+id/linearlay"
                 android:background="@mipmap/ic_stars_white">
         <TextView
-                android:text="TextView"
                 android:layout_width="50dp"
                 android:layout_height="70dp" android:id="@+id/ratingtext" android:layout_weight="0.06"
                 android:layout_marginTop="100dp" android:textStyle="bold" android:textSize="@android:dimen/notification_large_icon_height"
-                android:textAlignment="center"/>
+                android:textAlignment="center" android:textColor="@android:color/holo_blue_dark"
+                android:typeface="monospace" android:background="?attr/colorControlHighlight"
+                android:layout_marginRight="40dp" android:layout_marginLeft="40dp"/>
         </LinearLayout>
         </LinearLayout>
     </LinearLayout>
