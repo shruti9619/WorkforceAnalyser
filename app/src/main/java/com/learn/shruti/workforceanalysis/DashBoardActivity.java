@@ -63,11 +63,15 @@ public class DashBoardActivity extends AppCompatActivity {
     {
 
 
-        //method to calculate ratings of the day
+       /* //method to calculate ratings of the day
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Calendar cal = Calendar.getInstance();
         final String todayDateString = dateFormat.format(cal);
-        //System.out.println(dateFormat.format(cal)); //31/09/2017
+        //System.out.println(dateFormat.format(cal)); //31/09/2017*/
+
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        final String todayDateString = dateFormat.format(date); //31/09/2017
 
         Query reviewdatequery = mDatabase.child("reviews").orderByChild("dateOfReview").equalTo(todayDateString);
         reviewdatequery.addValueEventListener(new ValueEventListener() {
