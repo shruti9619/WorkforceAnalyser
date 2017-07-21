@@ -54,6 +54,8 @@ public class DashBoardActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        ratingCalculator();
+
     }
 
 
