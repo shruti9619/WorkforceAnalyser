@@ -44,5 +44,9 @@
                 android:layout_height="50px" android:id="@+id/textView" android:textStyle="bold"
                 android:textSize="40px" android:textAlignment="center"
                 android:textColor="@color/white" android:layout_weight="0.06" android:padding="10px"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/ratingtext" android:layout_weight="0.06"/>
     </LinearLayout>
 </RelativeLayout>
