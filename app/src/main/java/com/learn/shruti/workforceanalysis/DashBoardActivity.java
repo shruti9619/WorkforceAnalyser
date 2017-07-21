@@ -59,7 +59,7 @@ public class DashBoardActivity extends AppCompatActivity {
     }
 
 
-    private double ratingCalculator()
+    private void ratingCalculator()
     {
 
 
@@ -94,7 +94,7 @@ public class DashBoardActivity extends AppCompatActivity {
                         {
                             //calculate avg and get it outside this without final keyword error
                             ratingSum+= r.rating;
-                            numOfEmp++;
+                            ++numOfEmp;
 
                         }
 
@@ -109,11 +109,12 @@ public class DashBoardActivity extends AppCompatActivity {
 
             }
         });
-        return 0.0;
+
     }
 
     public void calculateAvg(long n, double sum)
     {
+        Toast.makeText(DashBoardActivity.this,"numofemp "+n+" sum "+sum,Toast.LENGTH_SHORT).show();
         ratingAvg= sum/n;
         ratingtext.setText(String.valueOf(ratingAvg));
 
