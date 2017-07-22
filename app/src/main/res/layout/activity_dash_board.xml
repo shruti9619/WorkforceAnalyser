@@ -44,20 +44,21 @@
                 android:layout_height="50px" android:id="@+id/textView" android:textStyle="bold"
                 android:textSize="40px" android:textAlignment="center"
                 android:textColor="@color/white" android:layout_weight="0.06" android:padding="10px"/>
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:layout_weight="0.61" android:background="@color/colorPrimary">
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" app:srcCompat="@color/colorPrimary" android:id="@+id/linearlay"
-                android:background="@mipmap/ic_stars_white">
+
         <TextView
-                android:layout_width="50dp"
-                android:layout_height="70dp" android:id="@+id/ratingtext" android:layout_weight="0.06"
-                android:layout_marginTop="100dp" android:textStyle="bold" android:textSize="@android:dimen/notification_large_icon_height"
-                android:textAlignment="center" android:textColor="@android:color/holo_blue_dark"
-                android:typeface="monospace" android:background="?attr/colorControlHighlight"
-                android:layout_marginRight="40dp" android:layout_marginLeft="40dp"/>
-        </LinearLayout>
-        </LinearLayout>
+                android:id="@+id/ratingtext" android:layout_weight="0.06"
+                android:layout_marginTop="10dp" android:textStyle="bold" android:textSize="32dp"
+                android:textAlignment="center" android:textColor="@color/black"
+                android:typeface="monospace" android:background="?attr/colorAccent"
+                android:layout_marginRight="40dp" android:layout_marginLeft="40dp" android:padding="10dp"
+                android:textAllCaps="false" android:layout_height="50dp" android:layout_width="match_parent"
+        />
+        <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp" app:srcCompat="@mipmap/ic_stars_white" android:id="@+id/imageView2"
+                android:layout_weight="0.06" android:background="@android:color/holo_red_dark" android:layout_marginTop="20dp"
+                android:layout_marginLeft="75dp"/>
+
+
     </LinearLayout>
 </RelativeLayout>

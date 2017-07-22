@@ -24,7 +24,7 @@ public class DashBoardActivity extends AppCompatActivity {
 
     FloatingActionButton fab_newemp, fab_showfeedback;
     DatabaseReference mDatabase;
-    List<Review> reviewList;
+
     double ratingAvg;
     TextView ratingtext;
 
@@ -36,7 +36,6 @@ public class DashBoardActivity extends AppCompatActivity {
         ratingtext = (TextView) findViewById(R.id.ratingtext);
         fab_newemp = (FloatingActionButton)findViewById(R.id.addempfab);
         fab_showfeedback = (FloatingActionButton)findViewById(R.id.showfeedbackfab);
-        reviewList = new ArrayList<Review>();
 
         fab_newemp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,11 +72,14 @@ public class DashBoardActivity extends AppCompatActivity {
         Date date = new Date();
         final String todayDateString = dateFormat.format(date); //31/09/2017
 
+        //query to fetch reviews if they are of current date to find daily rating
         Query reviewdatequery = mDatabase.child("reviews").orderByChild("dateOfReview").equalTo(todayDateString);
+
+
         reviewdatequery.addValueEventListener(new ValueEventListener() {
             double ratingSum = 0;
             long numOfEmp = 0;
-            double rating = 0;
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Toast.makeText(DashBoardActivity.this,"in on data changed",Toast.LENGTH_SHORT).show();
@@ -88,7 +90,7 @@ public class DashBoardActivity extends AppCompatActivity {
                     //review is only added once user with auth email is found
                     if(r.dateOfReview.equalsIgnoreCase(todayDateString))
                     {
-                        reviewList.add(r);
+
 
                         if (r.rating != 0)
                         {
@@ -101,6 +103,8 @@ public class DashBoardActivity extends AppCompatActivity {
                     }
 
                 }
+                //separate function call because variables cant be returned from this inner class and final variables
+                //can't be changed
                 calculateAvg(numOfEmp,ratingSum);
             }
 
@@ -114,9 +118,9 @@ public class DashBoardActivity extends AppCompatActivity {
 
     public void calculateAvg(long n, double sum)
     {
-        Toast.makeText(DashBoardActivity.this,"numofemp "+n+" sum "+sum,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(DashBoardActivity.this,"numofemp "+n+" sum "+sum,Toast.LENGTH_SHORT).show();
         ratingAvg= sum/n;
-        ratingtext.setText(String.valueOf(ratingAvg));
+        ratingtext.setText(String.valueOf(ratingAvg+"/10"));
 
 
     }
