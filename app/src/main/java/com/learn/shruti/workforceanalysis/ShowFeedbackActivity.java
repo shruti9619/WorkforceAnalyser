@@ -9,9 +9,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 import com.google.firebase.database.*;
 import com.learn.shruti.workforceanalysis.Model.Review;
@@ -40,11 +42,11 @@ public class ShowFeedbackActivity extends AppCompatActivity {
         reviewRecycleView = (RecyclerView)findViewById(R.id.feedbackrecycleView);
         reviewRecycleView.setHasFixedSize(true);
         reviewRecycleView.setLayoutManager(new LinearLayoutManager(this));
-        fbdadapter = new FeedbackAdapter(reviewList);
+
 
         mDatabase = FirebaseDatabase.getInstance().getReference("reviews");
 
-
+        fbdadapter = new FeedbackAdapter(reviewList);
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -59,7 +61,9 @@ public class ShowFeedbackActivity extends AppCompatActivity {
                     Toast.makeText(ShowFeedbackActivity.this,"com: " + r.comments + ", rate " + r.rating,
                             Toast.LENGTH_SHORT).show();
                 }
+                fbdadapter.notifyDataSetChanged();
             }
+
 
             @Override
             public void onCancelled(DatabaseError error) {
@@ -68,15 +72,14 @@ public class ShowFeedbackActivity extends AppCompatActivity {
             }
         });
 
+
         reviewRecycleView.setAdapter(fbdadapter);
+
+
+
+
+
     }
-
-
-
-
-    //recycle view code
-
-
 
 
 
@@ -85,11 +88,29 @@ public class ShowFeedbackActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search, menu);
         searchItem = menu.findItem(R.id.search);
+
         final SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView =
                 (SearchView) MenuItemCompat.getActionView(searchItem);
 
+
+        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean isFocused) {
+                if(!isFocused)
+                {
+                    Toast.makeText(ShowFeedbackActivity.this,"not focused",Toast.LENGTH_SHORT).show();
+                    searchView.setQuery("", false);
+                    reviewSearchList.clear();
+                    fbdadapter = new FeedbackAdapter(reviewList);
+                    fbdadapter.notifyDataSetChanged();
+                    reviewRecycleView.setAdapter(fbdadapter);
+                    //fbdadapter.notifyDataSetChanged();
+                }
+            }
+        });
+        searchView.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search) + "</font>"));
         //searchView.setSearchableInfo(
         //      searchManager.getSearchableInfo(getComponentName()));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -118,7 +139,11 @@ public class ShowFeedbackActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        reviewRecycleView.setAdapter(new FeedbackAdapter(reviewSearchList));
+                        //reviewRecycleView.setAdapter(new FeedbackAdapter(reviewSearchList));
+                        fbdadapter = new FeedbackAdapter(reviewSearchList);
+                        fbdadapter.notifyDataSetChanged();
+                        reviewRecycleView.setAdapter(fbdadapter);
+                        fbdadapter.notifyDataSetChanged();
                     }
                 }
 
@@ -129,6 +154,8 @@ public class ShowFeedbackActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 //Toast.makeText(ShowDataActivity.this,"textchanged",Toast.LENGTH_SHORT).show();
+                reviewSearchList.clear();
+                fbdadapter.notifyDataSetChanged();
                 return false;
             }
         });
@@ -157,12 +184,13 @@ public class ShowFeedbackActivity extends AppCompatActivity {
         searchItem.expandActionView();
         searchView.setQuery("", false);
         searchView.clearFocus();
-        reviewRecycleView.setAdapter(new FeedbackAdapter(reviewList));
+        reviewSearchList.clear();
+        fbdadapter = new FeedbackAdapter(reviewList);
+        fbdadapter.notifyDataSetChanged();
+        reviewRecycleView.setAdapter(fbdadapter);
+        fbdadapter.notifyDataSetChanged();
         super.onBackPressed();
     }
-
-
-
 
 
 

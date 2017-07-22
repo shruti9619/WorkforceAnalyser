@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Shruti on 22/07/2017.
  */
-public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.FeedackViewHolder>  {
+public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.FeedbackViewHolder>  {
 
     private List<Review> reviewList;
 
@@ -22,12 +22,12 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.Feedac
     }
 
     @Override
-    public FeedackViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new FeedackViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_user_item, parent,false));
+    public FeedbackViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new FeedbackViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_user_item, parent,false));
     }
 
     @Override
-    public void onBindViewHolder(FeedackViewHolder holder, int position) {
+    public void onBindViewHolder(FeedbackViewHolder holder, int position) {
 
         Review r = reviewList.get(position);
         holder.empname.setText(r.employeeName);
@@ -41,14 +41,14 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.Feedac
         return reviewList == null ? 0 : reviewList.size();
     }
 
-    class FeedackViewHolder extends RecyclerView.ViewHolder{
+    class FeedbackViewHolder extends RecyclerView.ViewHolder{
 
         TextView empname;
         TextView empemail;
         TextView reviewDate;
         TextView comment;
 
-        public FeedackViewHolder(View itemView) {
+        public FeedbackViewHolder(View itemView) {
             super(itemView);
 
             empname = (TextView) itemView.findViewById(R.id.tvempname);
