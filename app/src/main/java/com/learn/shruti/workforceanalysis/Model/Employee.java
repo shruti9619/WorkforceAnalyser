@@ -21,5 +21,6 @@ public class Employee {
         this.Password = pwd;
     }
 
-
+    public Employee() {
+    }
 }

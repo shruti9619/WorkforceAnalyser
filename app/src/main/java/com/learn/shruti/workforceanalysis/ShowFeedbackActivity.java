@@ -27,7 +27,8 @@ public class ShowFeedbackActivity extends AppCompatActivity {
     private List<Review> reviewList;
     private List<Review> reviewSearchList;
     private FeedbackAdapter fbdadapter;
-
+    MenuItem searchItem;
+    SearchView searchView;
 
 
     @Override
@@ -83,10 +84,10 @@ public class ShowFeedbackActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search, menu);
-        MenuItem searchItem = menu.findItem(R.id.search);
+        searchItem = menu.findItem(R.id.search);
         final SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        final SearchView searchView =
+        searchView =
                 (SearchView) MenuItemCompat.getActionView(searchItem);
 
         //searchView.setSearchableInfo(
@@ -102,17 +103,22 @@ public class ShowFeedbackActivity extends AppCompatActivity {
                     Boolean flag = false;
                     for (Review r : reviewList)
                     {
-                        if((r.dateOfReview == query))
+                        if((r.dateOfReview.equalsIgnoreCase(query)))
                         {
                             //DONT CLEAR THE Main list . rather create a new list which has your single element and then
                             // pass it to the recycleview
                             reviewSearchList.add(r);
+
                             flag = true;
                         }
                     }
                     if (!flag)
                     {
                         searchView.setQuery("No Matches!", false);
+                    }
+                    else
+                    {
+                        reviewRecycleView.setAdapter(new FeedbackAdapter(reviewSearchList));
                     }
                 }
 
@@ -145,7 +151,15 @@ public class ShowFeedbackActivity extends AppCompatActivity {
 
 
 
+    @Override
+    public void onBackPressed() {
 
+        searchItem.expandActionView();
+        searchView.setQuery("", false);
+        searchView.clearFocus();
+        reviewRecycleView.setAdapter(new FeedbackAdapter(reviewList));
+        super.onBackPressed();
+    }
 
 
 
