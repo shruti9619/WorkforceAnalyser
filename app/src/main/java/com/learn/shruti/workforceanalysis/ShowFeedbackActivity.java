@@ -2,6 +2,7 @@ package com.learn.shruti.workforceanalysis;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 import com.learn.shruti.workforceanalysis.Model.Review;
 
@@ -87,6 +89,7 @@ public class ShowFeedbackActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search, menu);
+        getMenuInflater().inflate(R.menu.menuaftersearch, menu);
         searchItem = menu.findItem(R.id.search);
 
         final SearchManager searchManager =
@@ -176,6 +179,21 @@ public class ShowFeedbackActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+
+            case R.id.logout:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(ShowFeedbackActivity.this,LoginSignupActivity.class));
+                break;
+        }
+
+        return true;
+    }
 
 
     @Override

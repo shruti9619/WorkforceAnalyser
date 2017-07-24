@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginSignupActivity extends AppCompatActivity {
 
@@ -27,6 +28,13 @@ public class LoginSignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_signup);
+
+        if(FirebaseAuth.getInstance().getCurrentUser() != null)
+        {
+            Intent intent = new Intent(LoginSignupActivity.this, DashBoardActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -62,6 +70,7 @@ public class LoginSignupActivity extends AppCompatActivity {
 
                 progressBar.setVisibility(View.VISIBLE);
 
+
                 //authenticate user
                 auth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(LoginSignupActivity.this, new OnCompleteListener<AuthResult>() {
@@ -85,6 +94,8 @@ public class LoginSignupActivity extends AppCompatActivity {
                                 }
                             }
                         });
+
+
             }
         });
 
