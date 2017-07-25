@@ -3,6 +3,12 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+            android:id="@+id/employees"
+            android:orderInCategory="100"
+            app:showAsAction="ifRoom"
+            android:icon="@mipmap/ic_person_white"
+            android:title="See Employees"/>
+    <item
             android:id="@+id/logout"
             android:orderInCategory="100"
             app:showAsAction="ifRoom"

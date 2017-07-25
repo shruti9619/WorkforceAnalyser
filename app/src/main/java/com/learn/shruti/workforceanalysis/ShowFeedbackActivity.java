@@ -78,9 +78,6 @@ public class ShowFeedbackActivity extends AppCompatActivity {
         reviewRecycleView.setAdapter(fbdadapter);
 
 
-
-
-
     }
 
 
