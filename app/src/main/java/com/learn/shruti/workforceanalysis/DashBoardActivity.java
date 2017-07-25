@@ -119,7 +119,13 @@ public class DashBoardActivity extends AppCompatActivity {
     public void calculateAvg(long n, double sum)
     {
         //Toast.makeText(DashBoardActivity.this,"numofemp "+n+" sum "+sum,Toast.LENGTH_SHORT).show();
+        try{
         ratingAvg= sum/n;
+        }
+        catch (Exception e)
+        {
+            ratingAvg = 0;
+        }
         ratingtext.setText(String.valueOf(ratingAvg+"/10"));
 
 

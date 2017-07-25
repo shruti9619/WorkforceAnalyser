@@ -42,7 +42,7 @@ public class ShowFeedbackActivity extends AppCompatActivity {
         reviewList = new ArrayList<>();
         reviewSearchList = new ArrayList<>();
         reviewRecycleView = (RecyclerView)findViewById(R.id.feedbackrecycleView);
-        reviewRecycleView.setHasFixedSize(true);
+        //reviewRecycleView.setHasFixedSize(true);
         reviewRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
 
@@ -53,15 +53,18 @@ public class ShowFeedbackActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                reviewList.clear();
+                fbdadapter.notifyDataSetChanged();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     //Getting the data from snapshot
                     Review r = postSnapshot.getValue(Review.class);
 
                     if(r.rating!=0)
-                        reviewList.add(r);
+                        if(!reviewList.contains(r))
+                            reviewList.add(r);
 
-                    Toast.makeText(ShowFeedbackActivity.this,"com: " + r.comments + ", rate " + r.rating,
-                            Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ShowFeedbackActivity.this,"com: " + r.comments + ", rate " + r.rating,
+                      //      Toast.LENGTH_SHORT).show();
                 }
                 fbdadapter.notifyDataSetChanged();
             }
@@ -147,7 +150,7 @@ public class ShowFeedbackActivity extends AppCompatActivity {
                     }
                 }
 
-                Toast.makeText(ShowFeedbackActivity.this,"submitted",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ShowFeedbackActivity.this,"submitted",Toast.LENGTH_SHORT).show();
                 return false;
             }
 
