@@ -123,16 +123,21 @@ public class ShowEmployeeActivity extends AppCompatActivity {
                 // Setting Dialog Title
                 alertDialog.setTitle("Delete");
 
+
                 // Setting Dialog Message
                 alertDialog.setMessage("Delete this employee?");
 
                 // Setting Icon to Dialog
-                alertDialog.setIcon(R.drawable.ic_delete_white);
+                alertDialog.setIcon(R.drawable.ic_delete_black);
 
                 // Setting Positive "Yes" Button
                 alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int which) {
-                        empList.remove(position);
+                        // removing from list
+                        Employee removed = empList.remove(position);
+
+                        // removing from firebase db
+                        mDatabase.child(removed.employeeID).setValue(null);
                         empadapter.notifyDataSetChanged();
                         // Write your code here to invoke YES event
                         //Toast.makeText(getApplicationContext(), "You clicked on YES", Toast.LENGTH_SHORT).show();
@@ -143,10 +148,11 @@ public class ShowEmployeeActivity extends AppCompatActivity {
                 alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Write your code here to invoke NO event
-                        Toast.makeText(getApplicationContext(), "You clicked on NO", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "You clicked on NO", Toast.LENGTH_SHORT).show();
                         dialog.cancel();
                     }
                 });
+                alertDialog.show();
 
             }
         }));
