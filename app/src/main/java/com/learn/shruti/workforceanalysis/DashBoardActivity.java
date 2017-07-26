@@ -1,15 +1,23 @@
 package com.learn.shruti.workforceanalysis;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
+import android.text.Html;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 import com.learn.shruti.workforceanalysis.Model.Review;
 
@@ -62,11 +70,8 @@ public class DashBoardActivity extends AppCompatActivity {
     {
 
 
-       /* //method to calculate ratings of the day
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar cal = Calendar.getInstance();
-        final String todayDateString = dateFormat.format(cal);
-        //System.out.println(dateFormat.format(cal)); //31/09/2017*/
+        //method to calculate ratings of the day
+
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
@@ -129,5 +134,48 @@ public class DashBoardActivity extends AppCompatActivity {
         ratingtext.setText(String.valueOf(ratingAvg+"/10"));
 
 
+    }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menuaftersearch, menu);
+
+
+        MenuItemCompat.OnActionExpandListener expandListener = new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem menuItem) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+
+                return true;
+            }
+        };
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+
+            case R.id.employees:
+                startActivity(new Intent(DashBoardActivity.this,ShowEmployeeActivity.class));
+                break;
+
+            case R.id.logout:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(DashBoardActivity.this,LoginSignupActivity.class));
+                break;
+        }
+
+        return true;
     }
 }

@@ -186,6 +186,10 @@ public class ShowFeedbackActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
 
+            case R.id.employees:
+                startActivity(new Intent(ShowFeedbackActivity.this,ShowEmployeeActivity.class));
+                break;
+
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(ShowFeedbackActivity.this,LoginSignupActivity.class));
