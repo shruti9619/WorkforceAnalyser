@@ -38,11 +38,12 @@ public class ShowEmployeeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_feedback);
+        setContentView(R.layout.activity_show_employee);
         reviewList = new ArrayList<>();
         empList = new ArrayList<>();
         empSearchList = new ArrayList<>();
         empRecycleView = (RecyclerView)findViewById(R.id.employeerecycleView);
+
         //reviewRecycleView.setHasFixedSize(true);
         empRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -183,6 +184,11 @@ public class ShowEmployeeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+
+            case R.id.employees:
+                startActivity(new Intent(ShowEmployeeActivity.this,ShowEmployeeActivity.class));
+                break;
+
 
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();

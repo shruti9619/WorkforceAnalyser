@@ -14,7 +14,7 @@
 
 
     <TextView
-            android:text="Feedbacks"
+            android:text="Employees"
             android:layout_width="match_parent"
             android:id="@+id/textView2" android:layout_alignParentStart="true" android:layout_height="80px"
             android:fontFamily="sans-serif" android:textSize="30sp" android:textColor="@color/white"
