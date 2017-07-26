@@ -12,7 +12,7 @@
             android:theme="@style/AppTheme">
         <uses-permission android:name="android.permission.INTERNET"/>
 
-        <activity android:name="com.learn.shruti.workforceanalysis.LoginSignupActivity">
+        <activity android:name=".LoginSignupActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -20,15 +20,17 @@
             </intent-filter>
         </activity>
         <activity
-                android:name="com.learn.shruti.workforceanalysis.ResetPasswordActivity"
+                android:name=".ResetPasswordActivity"
                 android:label="@string/title_activity_reset_password"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name="com.learn.shruti.workforceanalysis.DashBoardActivity">
+        <activity android:name=".DashBoardActivity">
         </activity>
-        <activity android:name="com.learn.shruti.workforceanalysis.AddEmployeeActivity">
+        <activity android:name=".AddEmployeeActivity">
         </activity>
-        <activity android:name="com.learn.shruti.workforceanalysis.ShowFeedbackActivity">
+        <activity android:name=".ShowFeedbackActivity">
+        </activity>
+        <activity android:name=".ShowEmployeeActivity">
         </activity>
     </application>
 
