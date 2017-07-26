@@ -32,6 +32,11 @@
         </activity>
         <activity android:name=".ShowEmployeeActivity">
         </activity>
+        <activity
+                android:name=".EditEmployeeActivity"
+                android:label="@string/title_activity_edit_employee"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

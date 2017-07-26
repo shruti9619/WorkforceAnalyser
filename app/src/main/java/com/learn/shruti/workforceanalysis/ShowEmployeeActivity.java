@@ -13,7 +13,10 @@ import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
@@ -33,6 +36,7 @@ public class ShowEmployeeActivity extends AppCompatActivity {
     private EmployeeAdapter empadapter;
     MenuItem searchItem;
     SearchView searchView;
+    RelativeLayout recyclelayout;
 
 
     @Override
@@ -43,6 +47,8 @@ public class ShowEmployeeActivity extends AppCompatActivity {
         empList = new ArrayList<>();
         empSearchList = new ArrayList<>();
         empRecycleView = (RecyclerView)findViewById(R.id.employeerecycleView);
+        recyclelayout = (RelativeLayout)findViewById(R.id.recyclelayout);
+
 
         //reviewRecycleView.setHasFixedSize(true);
         empRecycleView.setLayoutManager(new LinearLayoutManager(this));
@@ -80,6 +86,23 @@ public class ShowEmployeeActivity extends AppCompatActivity {
 
 
         empRecycleView.setAdapter(empadapter);
+
+        empRecycleView.addOnItemTouchListener(new RecycleTouchListener(this, empRecycleView, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+
+                Toast.makeText(ShowEmployeeActivity.this, "Click pos " +position, Toast.LENGTH_SHORT).show();
+                recyclelayout.setBackgroundColor(R.color.cardview_dark_background);
+
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+                Toast.makeText(ShowEmployeeActivity.this, "LongPressed pos " +position, Toast.LENGTH_SHORT).show();
+                
+            }
+        }));
 
 
     }
