@@ -91,16 +91,30 @@ public class ShowEmployeeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view, int position) {
 
-                Toast.makeText(ShowEmployeeActivity.this, "Click pos " +position, Toast.LENGTH_SHORT).show();
-                recyclelayout.setBackgroundColor(R.color.cardview_dark_background);
+                Toast.makeText(ShowEmployeeActivity.this, "Click pos " +position,
+                        Toast.LENGTH_SHORT).show();
+                //recyclelayout.setBackgroundColor(R.color.cardview_dark_background);
+                Employee selectedEmp = empList.get(position);
+                Intent editEmployeeIntent = new Intent(ShowEmployeeActivity.this,
+                        AddEmployeeActivity.class);
+                editEmployeeIntent.putExtra("empname", selectedEmp.empName);
+                editEmployeeIntent.putExtra("empemail", selectedEmp.empEmail);
+                editEmployeeIntent.putExtra("empphone", selectedEmp.Phone);
+                editEmployeeIntent.putExtra("emppass", selectedEmp.Password);
+                editEmployeeIntent.putExtra("empdesig", selectedEmp.designation);
+                editEmployeeIntent.putExtra("empid", selectedEmp.employeeID);
+                startActivity(editEmployeeIntent);
 
             }
 
             @Override
             public void onLongClick(View view, int position) {
 
-                Toast.makeText(ShowEmployeeActivity.this, "LongPressed pos " +position, Toast.LENGTH_SHORT).show();
-                
+                Toast.makeText(ShowEmployeeActivity.this, "LongPressed pos " +position,
+                        Toast.LENGTH_SHORT).show();
+                //recyclelayout.setBackgroundColor(R.color.cardview_dark_background);
+                empList.remove(position);
+                empadapter.notifyDataSetChanged();
             }
         }));
 

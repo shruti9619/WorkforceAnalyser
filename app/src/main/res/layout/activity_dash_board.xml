@@ -57,7 +57,7 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp" app:srcCompat="@drawable/customer" android:id="@+id/imageView2"
                 android:layout_weight="0.06" android:background="@android:color/transparent" android:layout_marginTop="20dp"
-                android:layout_marginLeft="70dp"/>
+                android:layout_marginLeft="67dp"/>
 
 
     </LinearLayout>

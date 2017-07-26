@@ -29,7 +29,10 @@ public class AddEmployeeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         setContentView(R.layout.activity_add_employee);
+
+
 
         btn_add_emp = (Button)findViewById(R.id.addempbutton);
         empnametext = (EditText)findViewById(R.id.empnametext);
@@ -39,6 +42,18 @@ public class AddEmployeeActivity extends AppCompatActivity {
         emppasstext = (EditText)findViewById(R.id.emppasstext);
         empNumber = (EditText)findViewById(R.id.empnumtext);
 
+        Bundle bundle = getIntent().getExtras();
+
+        if (bundle != null) {
+            empnametext.setText(bundle.getString("empname"));
+            empdesigtext.setText(bundle.getString("empdesig"));
+            emppasstext.setText(bundle.getString("emppass"));
+            empNumber.setText(String.valueOf(bundle.getLong("empphone")));
+            empemailtext.setText(bundle.getString("empemail"));
+            empidtext.setText(bundle.getString("empid"));
+            // id is fixed cant be changed
+            empidtext.setEnabled(false);
+        }
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
 
