@@ -131,6 +131,8 @@ public class DashBoardActivity extends AppCompatActivity {
         {
             ratingAvg = 0;
         }
+        if(Double.isNaN(ratingAvg))
+            ratingAvg = 0;
         ratingtext.setText(String.valueOf(ratingAvg+"/10"));
 
 
