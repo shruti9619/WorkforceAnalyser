@@ -1,7 +1,9 @@
 package com.learn.shruti.workforceanalysis;
 
+import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -87,6 +89,9 @@ public class ShowEmployeeActivity extends AppCompatActivity {
 
         empRecycleView.setAdapter(empadapter);
 
+
+
+
         empRecycleView.addOnItemTouchListener(new RecycleTouchListener(this, empRecycleView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
@@ -108,13 +113,41 @@ public class ShowEmployeeActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onLongClick(View view, int position) {
+            public void onLongClick(View view, final int position) {
 
                 Toast.makeText(ShowEmployeeActivity.this, "LongPressed pos " +position,
                         Toast.LENGTH_SHORT).show();
                 //recyclelayout.setBackgroundColor(R.color.cardview_dark_background);
-                empList.remove(position);
-                empadapter.notifyDataSetChanged();
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(ShowEmployeeActivity.this);
+
+                // Setting Dialog Title
+                alertDialog.setTitle("Delete");
+
+                // Setting Dialog Message
+                alertDialog.setMessage("Delete this employee?");
+
+                // Setting Icon to Dialog
+                alertDialog.setIcon(R.drawable.ic_delete_white);
+
+                // Setting Positive "Yes" Button
+                alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int which) {
+                        empList.remove(position);
+                        empadapter.notifyDataSetChanged();
+                        // Write your code here to invoke YES event
+                        //Toast.makeText(getApplicationContext(), "You clicked on YES", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                // Setting Negative "NO" Button
+                alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to invoke NO event
+                        Toast.makeText(getApplicationContext(), "You clicked on NO", Toast.LENGTH_SHORT).show();
+                        dialog.cancel();
+                    }
+                });
+
             }
         }));
 
