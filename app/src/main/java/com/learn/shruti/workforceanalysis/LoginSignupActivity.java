@@ -71,7 +71,7 @@ public class LoginSignupActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
 
 
-                //authenticate user
+                //authenticate user and log him in
                 auth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(LoginSignupActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -100,6 +100,7 @@ public class LoginSignupActivity extends AppCompatActivity {
         });
 
 
+        // sign up method for registration
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

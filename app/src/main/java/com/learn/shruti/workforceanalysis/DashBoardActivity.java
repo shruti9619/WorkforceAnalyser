@@ -61,6 +61,8 @@ public class DashBoardActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+
+        //method to calculate average rating for the day
         ratingCalculator();
 
     }
@@ -69,10 +71,7 @@ public class DashBoardActivity extends AppCompatActivity {
     private void ratingCalculator()
     {
 
-
-        //method to calculate ratings of the day
-
-
+        // to fetch today's date in string format
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         final String todayDateString = dateFormat.format(date); //31/09/2017
@@ -87,7 +86,7 @@ public class DashBoardActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Toast.makeText(DashBoardActivity.this,"in on data changed",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(DashBoardActivity.this,"in on data changed",Toast.LENGTH_SHORT).show();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     //Getting the data from snapshot
                     Review r = postSnapshot.getValue(Review.class);
@@ -95,7 +94,6 @@ public class DashBoardActivity extends AppCompatActivity {
                     //review is only added once user with auth email is found
                     if(r.dateOfReview.equalsIgnoreCase(todayDateString))
                     {
-
 
                         if (r.rating != 0)
                         {

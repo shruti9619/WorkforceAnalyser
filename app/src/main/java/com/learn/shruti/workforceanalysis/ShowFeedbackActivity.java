@@ -49,6 +49,7 @@ public class ShowFeedbackActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference("reviews");
 
         fbdadapter = new FeedbackAdapter(reviewList);
+        // fetching data from firebase to listen for changes in data and populating the list
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -62,9 +63,6 @@ public class ShowFeedbackActivity extends AppCompatActivity {
                     if(r.rating!=0)
                         if(!reviewList.contains(r))
                             reviewList.add(r);
-
-                    //Toast.makeText(ShowFeedbackActivity.this,"com: " + r.comments + ", rate " + r.rating,
-                      //      Toast.LENGTH_SHORT).show();
                 }
                 fbdadapter.notifyDataSetChanged();
             }
@@ -77,10 +75,7 @@ public class ShowFeedbackActivity extends AppCompatActivity {
             }
         });
 
-
         reviewRecycleView.setAdapter(fbdadapter);
-
-
     }
 
 
@@ -103,7 +98,7 @@ public class ShowFeedbackActivity extends AppCompatActivity {
             public void onFocusChange(View view, boolean isFocused) {
                 if(!isFocused)
                 {
-                    Toast.makeText(ShowFeedbackActivity.this,"not focused",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ShowFeedbackActivity.this,"not focused",Toast.LENGTH_SHORT).show();
                     searchView.setQuery("", false);
                     reviewSearchList.clear();
                     fbdadapter = new FeedbackAdapter(reviewList);
@@ -114,8 +109,7 @@ public class ShowFeedbackActivity extends AppCompatActivity {
             }
         });
         searchView.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search) + "</font>"));
-        //searchView.setSearchableInfo(
-        //      searchManager.getSearchableInfo(getComponentName()));
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -213,8 +207,4 @@ public class ShowFeedbackActivity extends AppCompatActivity {
         fbdadapter.notifyDataSetChanged();
         super.onBackPressed();
     }
-
-
-
-
 }

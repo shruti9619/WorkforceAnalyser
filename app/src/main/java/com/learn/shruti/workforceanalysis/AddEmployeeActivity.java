@@ -53,11 +53,13 @@ public class AddEmployeeActivity extends AppCompatActivity {
             empidtext.setText(bundle.getString("empid"));
             // id is fixed cant be changed
             empidtext.setEnabled(false);
+            empemailtext.setEnabled(false);
         }
+
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
 
-
+        // add employee details after validations
         btn_add_emp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,13 +123,10 @@ public class AddEmployeeActivity extends AppCompatActivity {
     }
 
 
+    // method to fetch db reference from firebase and create new employee in db without immediate login
     private void addEmploy(Employee newEmp)
     {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("users");
-
-
-        //Toast.makeText(this,mDatabase.toString(),Toast.LENGTH_SHORT).show();
-// pushing user to 'users' node using the userId
         mDatabase.child(newEmp.employeeID).setValue(newEmp);
         auth.createUserWithEmailAndPassword(newEmp.empEmail, newEmp.Password);
         startActivity(new Intent(AddEmployeeActivity.this,DashBoardActivity.class));

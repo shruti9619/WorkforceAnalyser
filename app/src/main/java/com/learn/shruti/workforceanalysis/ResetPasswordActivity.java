@@ -50,7 +50,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                     Toast.makeText(getApplication(), "Enter your registered email id", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                // reset password mail sender with firebase
                 progressBar.setVisibility(View.VISIBLE);
                 auth.sendPasswordResetEmail(email)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -59,6 +59,8 @@ public class ShowEmployeeActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
 
         empadapter = new EmployeeAdapter(empList);
+
+        // data change listener for list population
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -91,14 +93,11 @@ public class ShowEmployeeActivity extends AppCompatActivity {
 
 
 
-
+        // event to accept click to edit employee details and long press to delete employee
         empRecycleView.addOnItemTouchListener(new RecycleTouchListener(this, empRecycleView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
 
-                Toast.makeText(ShowEmployeeActivity.this, "Click pos " +position,
-                        Toast.LENGTH_SHORT).show();
-                //recyclelayout.setBackgroundColor(R.color.cardview_dark_background);
                 Employee selectedEmp = empList.get(position);
                 Intent editEmployeeIntent = new Intent(ShowEmployeeActivity.this,
                         AddEmployeeActivity.class);
@@ -115,9 +114,7 @@ public class ShowEmployeeActivity extends AppCompatActivity {
             @Override
             public void onLongClick(View view, final int position) {
 
-                Toast.makeText(ShowEmployeeActivity.this, "LongPressed pos " +position,
-                        Toast.LENGTH_SHORT).show();
-                //recyclelayout.setBackgroundColor(R.color.cardview_dark_background);
+              // generating alert to ask user to delete employee detail
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(ShowEmployeeActivity.this);
 
                 // Setting Dialog Title
@@ -139,24 +136,20 @@ public class ShowEmployeeActivity extends AppCompatActivity {
                         // removing from firebase db
                         mDatabase.child(removed.employeeID).setValue(null);
                         empadapter.notifyDataSetChanged();
-                        // Write your code here to invoke YES event
-                        //Toast.makeText(getApplicationContext(), "You clicked on YES", Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
                 // Setting Negative "NO" Button
                 alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // Write your code here to invoke NO event
-                        //Toast.makeText(getApplicationContext(), "You clicked on NO", Toast.LENGTH_SHORT).show();
+
                         dialog.cancel();
                     }
                 });
                 alertDialog.show();
-
             }
         }));
-
 
     }
 
@@ -191,8 +184,7 @@ public class ShowEmployeeActivity extends AppCompatActivity {
             }
         });
         searchView.setQueryHint(Html.fromHtml("<font color = #ffffff>" + "search name" + "</font>"));
-        //searchView.setSearchableInfo(
-        //      searchManager.getSearchableInfo(getComponentName()));
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
