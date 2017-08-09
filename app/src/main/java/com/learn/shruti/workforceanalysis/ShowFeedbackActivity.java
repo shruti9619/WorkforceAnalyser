@@ -20,7 +20,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 import com.learn.shruti.workforceanalysis.Model.Review;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -64,6 +69,18 @@ public class ShowFeedbackActivity extends AppCompatActivity {
                         if(!reviewList.contains(r))
                             reviewList.add(r);
                 }
+
+                Collections.sort(reviewList, new Comparator<Review>() {
+                    DateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+                    @Override
+                    public int compare(Review o1, Review o2) {
+                        try {
+                            return f.parse(o2.dateOfReview).compareTo(f.parse(o1.dateOfReview));
+                        } catch (ParseException e) {
+                            throw new IllegalArgumentException(e);
+                        }
+                    }
+                });
                 fbdadapter.notifyDataSetChanged();
             }
 
