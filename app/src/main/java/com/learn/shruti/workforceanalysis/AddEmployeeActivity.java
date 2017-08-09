@@ -102,6 +102,12 @@ public class AddEmployeeActivity extends AppCompatActivity {
                 return;
             }
 
+            if(pass.length() < 6)
+            {
+                Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             String phone = empNumber.getText().toString();
 
             if(TextUtils.isEmpty(phone))
@@ -114,7 +120,7 @@ public class AddEmployeeActivity extends AppCompatActivity {
 
                 Employee newEmp = new Employee(idtext,eName,desig,email,Long.valueOf(phone),MD5Hasher.md5hash(pass));
 
-            addEmploy(newEmp);
+                addEmploy(newEmp, pass);
 
 
 
@@ -124,11 +130,11 @@ public class AddEmployeeActivity extends AppCompatActivity {
 
 
     // method to fetch db reference from firebase and create new employee in db without immediate login
-    private void addEmploy(Employee newEmp)
+    private void addEmploy(Employee newEmp,String pass)
     {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("users");
         mDatabase.child(newEmp.employeeID).setValue(newEmp);
-        auth.createUserWithEmailAndPassword(newEmp.empEmail, MD5Hasher.md5hash(newEmp.Password));
+        auth.createUserWithEmailAndPassword(newEmp.empEmail, MD5Hasher.md5hash(pass));
         startActivity(new Intent(AddEmployeeActivity.this,DashBoardActivity.class));
     }
 }
