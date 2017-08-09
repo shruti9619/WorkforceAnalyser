@@ -17,6 +17,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.security.MessageDigest;
+
 public class LoginSignupActivity extends AppCompatActivity {
 
     private EditText inputEmail, inputPassword;
@@ -72,7 +74,7 @@ public class LoginSignupActivity extends AppCompatActivity {
 
 
                 //authenticate user and log him in
-                auth.signInWithEmailAndPassword(email, password)
+                auth.signInWithEmailAndPassword(email, MD5Hasher.md5hash(password))
                         .addOnCompleteListener(LoginSignupActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -125,7 +127,7 @@ public class LoginSignupActivity extends AppCompatActivity {
 
                 progressBar.setVisibility(View.VISIBLE);
                 //create user
-                auth.createUserWithEmailAndPassword(email, password)
+                auth.createUserWithEmailAndPassword(email, MD5Hasher.md5hash(password))
                         .addOnCompleteListener(LoginSignupActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -153,4 +155,7 @@ public class LoginSignupActivity extends AppCompatActivity {
         super.onResume();
         progressBar.setVisibility(View.GONE);
     }
+
+
+
 }

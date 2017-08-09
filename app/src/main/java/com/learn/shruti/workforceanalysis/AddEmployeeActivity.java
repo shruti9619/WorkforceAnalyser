@@ -112,7 +112,7 @@ public class AddEmployeeActivity extends AppCompatActivity {
 
 
 
-                Employee newEmp = new Employee(idtext,eName,desig,email,Long.valueOf(phone),pass);
+                Employee newEmp = new Employee(idtext,eName,desig,email,Long.valueOf(phone),MD5Hasher.md5hash(pass));
 
             addEmploy(newEmp);
 
@@ -128,7 +128,7 @@ public class AddEmployeeActivity extends AppCompatActivity {
     {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("users");
         mDatabase.child(newEmp.employeeID).setValue(newEmp);
-        auth.createUserWithEmailAndPassword(newEmp.empEmail, newEmp.Password);
+        auth.createUserWithEmailAndPassword(newEmp.empEmail, MD5Hasher.md5hash(newEmp.Password));
         startActivity(new Intent(AddEmployeeActivity.this,DashBoardActivity.class));
     }
 }
