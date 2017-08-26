@@ -30,7 +30,7 @@ import java.util.List;
 
 public class DashBoardActivity extends AppCompatActivity {
 
-    FloatingActionButton fab_newemp, fab_showfeedback;
+    FloatingActionButton fab_newemp, fab_showfeedback, fab_showplotdata;
     DatabaseReference mDatabase;
 
     double ratingAvg;
@@ -44,6 +44,7 @@ public class DashBoardActivity extends AppCompatActivity {
         ratingtext = (TextView) findViewById(R.id.ratingtext);
         fab_newemp = (FloatingActionButton)findViewById(R.id.addempfab);
         fab_showfeedback = (FloatingActionButton)findViewById(R.id.showfeedbackfab);
+        fab_showplotdata = (FloatingActionButton)findViewById(R.id.showplotfab);
 
         fab_newemp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +57,13 @@ public class DashBoardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(DashBoardActivity.this,ShowFeedbackActivity.class));
+            }
+        });
+
+        fab_showplotdata.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashBoardActivity.this,PlotActivity.class));
             }
         });
 
