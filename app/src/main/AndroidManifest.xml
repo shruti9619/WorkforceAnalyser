@@ -32,6 +32,8 @@
         </activity>
         <activity android:name=".ShowEmployeeActivity">
         </activity>
+        <activity android:name=".PlotActivity">
+        </activity>
     </application>
 
 </manifest>
