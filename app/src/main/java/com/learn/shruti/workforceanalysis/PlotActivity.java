@@ -1,5 +1,6 @@
 package com.learn.shruti.workforceanalysis;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 
 public class PlotActivity extends AppCompatActivity {
 
@@ -15,14 +17,37 @@ public class PlotActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plot);
 
+        int unhappy_count = 0;
+        int satisfied_count = 0;
+        int happy_count = 0;
+
+
+
+        SharedPreferences sharedPreferences = getSharedPreferences("WorkForceAnalyser", MODE_PRIVATE);
+
+        if(sharedPreferences.contains("unhappy_count"))
+           unhappy_count = sharedPreferences.getInt("unhappy_count",0);
+
+        if(sharedPreferences.contains("happy_count"))
+            happy_count = sharedPreferences.getInt("happy_count",0);
+
+
+        if(sharedPreferences.contains("satisfied_count"))
+            satisfied_count = sharedPreferences.getInt("satisfied_count",0);
+
+
 
         GraphView graph = (GraphView) findViewById(R.id.graph);
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {
-                new DataPoint(1, 5),
-                new DataPoint(2, 3),
-                new DataPoint(3, 2),
-                new DataPoint(4, 6)
+                new DataPoint(1, unhappy_count),
+                new DataPoint(2, satisfied_count),
+                new DataPoint(3, happy_count)
         });
+
+        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
+        staticLabelsFormatter.setHorizontalLabels(new String[] {"Unhappy", "Satisfied", "Happy"});
+//
+        graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
         graph.addSeries(series);
 
 // styling

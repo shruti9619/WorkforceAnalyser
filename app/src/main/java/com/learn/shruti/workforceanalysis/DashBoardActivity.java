@@ -3,6 +3,7 @@ package com.learn.shruti.workforceanalysis;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -92,6 +93,10 @@ public class DashBoardActivity extends AppCompatActivity {
             double ratingSum = 0;
             long numOfEmp = 0;
 
+            int unhappy_count = 0;
+            int satisfied_count = 0;
+            int happy_count = 0;
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //Toast.makeText(DashBoardActivity.this,"in on data changed",Toast.LENGTH_SHORT).show();
@@ -109,6 +114,17 @@ public class DashBoardActivity extends AppCompatActivity {
                             ratingSum+= r.rating;
                             ++numOfEmp;
 
+
+                            //to divide the employees for data analysis and categorization
+                            if(r.rating > 7)
+                                happy_count+=1;
+
+                            else if(r.rating > 4)
+                                satisfied_count+=1;
+
+                            else
+                                unhappy_count+=1;
+
                         }
 
                     }
@@ -117,6 +133,7 @@ public class DashBoardActivity extends AppCompatActivity {
                 //separate function call because variables cant be returned from this inner class and final variables
                 //can't be changed
                 calculateAvg(numOfEmp,ratingSum);
+                storeCategorization(unhappy_count,satisfied_count,happy_count);
             }
 
             @Override
@@ -126,6 +143,16 @@ public class DashBoardActivity extends AppCompatActivity {
         });
 
     }
+
+    // method to fetch categories of various employees depending on their ratings and storing them
+    public void storeCategorization(int unhappy, int satisfied, int happy)
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("WorkForceAnalyser", MODE_PRIVATE);
+        sharedPreferences.edit().putInt("unhappy_count",unhappy).commit();
+        sharedPreferences.edit().putInt("happy_count",happy).commit();
+        sharedPreferences.edit().putInt("satisfied_count",satisfied).commit();
+    }
+
 
     public void calculateAvg(long n, double sum)
     {
