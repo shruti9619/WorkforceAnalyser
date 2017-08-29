@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
@@ -48,9 +49,11 @@ public class PlotActivity extends AppCompatActivity {
         staticLabelsFormatter.setHorizontalLabels(new String[] {"Unhappy", "Satisfied", "Happy"});
 //
         graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
-        graph.addSeries(series);
 
-// styling
+
+        graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
+        graph.addSeries(series);
+        // styling
         series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
             @Override
             public int get(DataPoint data) {
@@ -60,7 +63,7 @@ public class PlotActivity extends AppCompatActivity {
 
         series.setSpacing(50);
 
-// draw values on top
+        // draw values on top
         series.setDrawValuesOnTop(true);
         series.setValuesOnTopColor(Color.RED);
 
