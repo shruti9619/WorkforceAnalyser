@@ -1,15 +1,21 @@
 package com.learn.shruti.workforceanalysis;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import com.google.firebase.auth.FirebaseAuth;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
+
 
 public class PlotActivity extends AppCompatActivity {
 
@@ -21,6 +27,7 @@ public class PlotActivity extends AppCompatActivity {
         int unhappy_count = 0;
         int satisfied_count = 0;
         int happy_count = 0;
+
 
 
 
@@ -68,4 +75,53 @@ public class PlotActivity extends AppCompatActivity {
         series.setValuesOnTopColor(Color.RED);
 
     }
+
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_plot, menu);
+
+
+        MenuItemCompat.OnActionExpandListener expandListener = new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem menuItem) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+
+                return true;
+            }
+        };
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+
+            case R.id.keywordgen:
+                startActivity(new Intent(PlotActivity.this,FeedbackAnalysisActivity.class));
+                break;
+
+            case R.id.sentimentgen:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(PlotActivity.this,LoginSignupActivity.class));
+                break;
+        }
+
+        return true;
+    }
 }
+
+
+
+
+

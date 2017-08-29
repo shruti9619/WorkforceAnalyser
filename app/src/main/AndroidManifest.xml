@@ -34,6 +34,8 @@
         </activity>
         <activity android:name=".PlotActivity">
         </activity>
+        <activity android:name=".FeedbackAnalysisActivity">
+        </activity>
     </application>
 
 </manifest>
