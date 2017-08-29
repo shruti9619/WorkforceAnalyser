@@ -16,13 +16,19 @@ import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 
+import java.util.ArrayList;
+
 
 public class PlotActivity extends AppCompatActivity {
 
+
+    ArrayList<String> feedbackList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plot);
+
+         feedbackList= getIntent().getStringArrayListExtra("feedbacklist");
 
         int unhappy_count = 0;
         int satisfied_count = 0;
@@ -107,13 +113,11 @@ public class PlotActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
 
-            case R.id.keywordgen:
-                startActivity(new Intent(PlotActivity.this,FeedbackAnalysisActivity.class));
-                break;
 
             case R.id.sentimentgen:
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(PlotActivity.this,LoginSignupActivity.class));
+                startActivity(new Intent(PlotActivity.this,SentimentActivity.class)
+                        .putStringArrayListExtra("feedbacklist",feedbackList));
                 break;
         }
 

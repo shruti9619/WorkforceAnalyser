@@ -34,7 +34,7 @@
         </activity>
         <activity android:name=".PlotActivity">
         </activity>
-        <activity android:name=".FeedbackAnalysisActivity">
+        <activity android:name=".SentimentActivity">
         </activity>
     </application>
 

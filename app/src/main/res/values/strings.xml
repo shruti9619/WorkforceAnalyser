@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">WorkForce Analyser</string>
-
+    <string name="senti">Analytical sentiment analysis of the employees based on their feedback powered by
+       AI and Machine Learning technology. \n The closer to hundred the happier your workforce!</string>
     <string name="action_sign_in_short">Register</string>
     <string name="email">Email</string>
     <string name="search">Date eg. 31/02/2017</string>
@@ -32,4 +33,5 @@
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.
     </string>
     <string name="title_activity_edit_employee">Edit Details</string>
+
 </resources>

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.text.Html;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,11 +24,9 @@ import com.google.firebase.database.*;
 import com.learn.shruti.workforceanalysis.Model.Review;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class DashBoardActivity extends AppCompatActivity {
 
@@ -36,11 +35,14 @@ public class DashBoardActivity extends AppCompatActivity {
 
     double ratingAvg;
     TextView ratingtext;
+    ArrayList<String> feedbackList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
+
+        feedbackList = new ArrayList<>();
 
         ratingtext = (TextView) findViewById(R.id.ratingtext);
         fab_newemp = (FloatingActionButton)findViewById(R.id.addempfab);
@@ -64,7 +66,10 @@ public class DashBoardActivity extends AppCompatActivity {
         fab_showplotdata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DashBoardActivity.this,PlotActivity.class));
+
+                //added feedback list to intent for analysis
+                startActivity(new Intent(DashBoardActivity.this,PlotActivity.class)
+                        .putStringArrayListExtra("feedbacklist",feedbackList));
             }
         });
 
@@ -74,7 +79,37 @@ public class DashBoardActivity extends AppCompatActivity {
         //method to calculate average rating for the day
         ratingCalculator();
 
+
+
+        // to get feedback list irrespective of date
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("reviews");
+
+        // fetching data from firebase to listen for changes in data and populating the list
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                feedbackList.clear();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    //Getting the data from snapshot
+                    Review r = postSnapshot.getValue(Review.class);
+
+                    if(!r.comments.equalsIgnoreCase("NA"))
+                        feedbackList.add(r.comments);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("SOme Tag: ", "Failed to read value.", error.toException());
+            }
+        });
+
     }
+
+
+
 
 
     private void ratingCalculator()
@@ -99,6 +134,7 @@ public class DashBoardActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 //Toast.makeText(DashBoardActivity.this,"in on data changed",Toast.LENGTH_SHORT).show();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     //Getting the data from snapshot
@@ -134,6 +170,7 @@ public class DashBoardActivity extends AppCompatActivity {
                 //can't be changed
                 calculateAvg(numOfEmp,ratingSum);
                 storeCategorization(unhappy_count,satisfied_count,happy_count);
+
             }
 
             @Override
