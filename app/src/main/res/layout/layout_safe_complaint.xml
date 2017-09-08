@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardUseCompatPadding="true"
+        android:background="@color/colorPrimaryDark"
+        card_view:cardBackgroundColor="?attr/colorAccent" card_view:cardElevation="11dp">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="?android:selectableItemBackground" android:padding="10px" android:layout_margin="10px"
+            android:minHeight="170dp" android:layout_height="wrap_content"
+            android:id="@+id/safecomprecyclelayout">
+
+        <TextView android:id="@+id/issuerecycle"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_margin="5dp"
+                  android:text="Issue:"
+                  android:textColor="@android:color/black"
+                  android:textSize="18sp" android:textStyle="normal|italic" android:padding="2px"/>
+
+        <TextView android:id="@+id/issuedescrecycle"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_below="@+id/issuerecycle"
+                  android:text="Desc: "
+                  android:layout_margin="5dp"
+                  android:textColor="@android:color/black"
+                  android:textSize="18sp" android:textStyle="normal|italic" android:padding="2px"/>
+
+        <TextView android:id="@+id/issuedaterecycle"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_below="@+id/issuedescrecycle"
+                  android:layout_margin="5dp"
+                  android:text="Id:"
+                  android:textColor="@android:color/black"
+                  android:textSize="18sp" android:textStyle="normal|italic" android:padding="2px"/>
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

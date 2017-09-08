@@ -242,6 +242,10 @@ public class DashBoardActivity extends AppCompatActivity {
                 startActivity(new Intent(DashBoardActivity.this,ShowEmployeeActivity.class));
                 break;
 
+            case R.id.safecompmenu:
+                startActivity(new Intent(DashBoardActivity.this,ShowSafeComplaintActivity.class));
+                break;
+
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(DashBoardActivity.this,LoginSignupActivity.class));

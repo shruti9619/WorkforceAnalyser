@@ -36,6 +36,8 @@
         </activity>
         <activity android:name=".SentimentActivity">
         </activity>
+        <activity android:name=".ShowSafeComplaintActivity">
+        </activity>
     </application>
 
 </manifest>

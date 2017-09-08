@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">WorkForce Analyser</string>
     <string name="senti">Analytical sentiment analysis of the employees based on their feedback powered by
-       AI and Machine Learning technology. \n The closer to hundred the happier your workforce!</string>
+        AI and Machine Learning technology. \n The closer to hundred the happier your workforce!
+    </string>
     <string name="action_sign_in_short">Register</string>
     <string name="email">Email</string>
     <string name="search">Date eg. 31/02/2017</string>

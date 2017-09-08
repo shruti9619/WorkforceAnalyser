@@ -77,7 +77,7 @@ public class SentimentActivity extends AppCompatActivity {
             public void onRequestFinished(Request<Object> request) {
 
                 avgsent =100*(sumofsentiment/feedbackList.size());
-                trtv.setText(avgsent.toString());
+                trtv.setText(avgsent.toString()+ " %");
 //                Toast.makeText(SentimentActivity.this, "Sentiment avg: "
 //                        + String.valueOf(sumofsentiment/feedbackList.size()), Toast.LENGTH_SHORT).show();
 

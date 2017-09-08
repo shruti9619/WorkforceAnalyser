@@ -258,6 +258,10 @@ public class ShowEmployeeActivity extends AppCompatActivity {
                 break;
 
 
+            case R.id.safecompmenu:
+                startActivity(new Intent(ShowEmployeeActivity.this,ShowSafeComplaintActivity.class));
+                break;
+
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(ShowEmployeeActivity.this,LoginSignupActivity.class));

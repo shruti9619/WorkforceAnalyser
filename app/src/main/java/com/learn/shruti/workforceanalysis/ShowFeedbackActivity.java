@@ -201,6 +201,10 @@ public class ShowFeedbackActivity extends AppCompatActivity {
                 startActivity(new Intent(ShowFeedbackActivity.this,ShowEmployeeActivity.class));
                 break;
 
+            case R.id.safecompmenu:
+                 startActivity(new Intent(ShowFeedbackActivity.this,ShowSafeComplaintActivity.class));
+                 break;
+
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(ShowFeedbackActivity.this,LoginSignupActivity.class));

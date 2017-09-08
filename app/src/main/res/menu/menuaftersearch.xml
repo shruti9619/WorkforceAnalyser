@@ -8,10 +8,17 @@
             app:showAsAction="ifRoom"
             android:icon="@mipmap/ic_person_white"
             android:title="See Employees"/>
+
+    <item
+            android:id="@+id/safecompmenu"
+            android:orderInCategory="100"
+            app:showAsAction="never"
+            android:title="Safe Complaints"/>
+
     <item
             android:id="@+id/logout"
             android:orderInCategory="100"
-            app:showAsAction="ifRoom"
+            app:showAsAction="never"
             android:title="Logout"/>
 
 
